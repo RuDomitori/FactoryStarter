@@ -1,4 +1,4 @@
-namespace Core.Construction
+namespace FactoryStarter.Core.Constructions
 {
     public class Transport: Construction
     {

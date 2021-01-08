@@ -1,6 +1,4 @@
-using System.Data.Common;
-
-namespace Core.Items
+namespace FactoryStarter.Core.Items
 {
     public class Pack: Item
     {

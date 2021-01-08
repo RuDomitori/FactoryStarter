@@ -1,6 +1,4 @@
-using System;
-
-namespace Core
+namespace FactoryStarter.Core
 {
     public struct Position
     {

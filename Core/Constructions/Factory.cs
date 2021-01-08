@@ -1,6 +1,6 @@
 using System;
 
-namespace Core.Construction
+namespace FactoryStarter.Core.Constructions
 {
     public class Factory: Construction
     {

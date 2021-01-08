@@ -1,4 +1,4 @@
-namespace Core
+namespace FactoryStarter.Core
 {
     public abstract class Message
     {

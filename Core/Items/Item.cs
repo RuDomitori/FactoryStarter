@@ -1,4 +1,4 @@
-namespace Core.Items
+namespace FactoryStarter.Core.Items
 {
     public class Item
     {

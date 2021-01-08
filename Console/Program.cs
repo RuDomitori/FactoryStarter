@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Text.Json;
-using Core;
+using FactoryStarter.Core;
 
-namespace Factory_Starter_Core
+namespace FactoryStarter.Console
 {
     class Program
     {
@@ -10,7 +9,7 @@ namespace Factory_Starter_Core
         {
             var level = new Level();
             var message = level.ChangeSize(10, 10);
-            Console.WriteLine(message);
+            System.Console.WriteLine(message);
         }
     }
 }

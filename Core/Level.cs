@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using Core.Construction;
+using FactoryStarter.Core.Constructions;
 
-namespace Core
+namespace FactoryStarter.Core
 {
     public class Level
     {

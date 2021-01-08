@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using Core.Construction;
+using FactoryStarter.Core.Constructions;
 
-namespace Core
+namespace FactoryStarter.Core
 {
     public class Cell
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Core.Items;
+using FactoryStarter.Core.Items;
 
-namespace Core.Construction
+namespace FactoryStarter.Core.Constructions
 {
     public class Construction
     {
