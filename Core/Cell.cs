@@ -5,8 +5,8 @@ namespace Core
 {
     public class Cell
     {
-        public Factory Factory;
-        public Logic Logic;
-        public Transport Transport;
+        public Factory Factory = null;
+        public Logic Logic = null;
+        public Transport Transport = null;
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text.Json;
+using Core;
 
 namespace Factory_Starter_Core
 {
@@ -6,7 +8,9 @@ namespace Factory_Starter_Core
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var level = new Level();
+            var message = level.ChangeSize(10, 10);
+            Console.WriteLine(message);
         }
     }
 }
