@@ -1,12 +1,23 @@
 namespace FactoryStarter.Core.Items
 {
-    public class Item
+    internal class Item
     {
-        public readonly ItemType Type;
+        internal readonly ItemType Type;
     }
 
-    public class ItemType
+    internal class ItemType
     {
-        public readonly uint Id;
+        internal readonly uint Id;
+
+        internal ItemType(ItemTypeInfo info)
+        {
+            Id = info.Id;
+        }
     }
+
+    public class ItemTypeInfo
+    {
+        public uint Id;
+    }
+    
 }

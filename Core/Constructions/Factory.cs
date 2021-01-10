@@ -1,15 +1,25 @@
 using System;
+using System.Collections.Generic;
+using FactoryStarter.Core.Items;
 
 namespace FactoryStarter.Core.Constructions
 {
-    public class Factory: Construction
+    internal class Factory: Construction
     {
         public FactoryType FactoryType => (FactoryType) Type;
-        public object OnTact(Cell[,] field) => FactoryType.OnTact(field, this);
+        internal object OnTact(Cell[,] field) => FactoryType.OnTact(field, this);
     }
 
-    public class FactoryType : ConstructionType
+    internal class FactoryType : ConstructionType
     {
-        public object OnTact(Cell[,] field, Factory factory) => throw new NotImplementedException();
+        internal FactoryType(FactoryTypeInfo info, Dictionary<uint, ItemType> itemTypes) : base(info, itemTypes) {}
+        internal object OnTact(Cell[,] field, Factory factory) => throw new NotImplementedException();
+    }
+
+    [Serializable]
+    public class FactoryTypeInfo : ConstructionTypeInfo
+    {
+        public FactoryTypeInfo() {}
+        internal FactoryTypeInfo(FactoryType type) : base(type) {}
     }
 }

@@ -1,23 +1,61 @@
+using System;
 using System.Collections.Generic;
 using FactoryStarter.Core.Items;
 
 namespace FactoryStarter.Core.Constructions
 {
-    public class Construction
+    internal abstract class Construction
     {
-        public readonly ConstructionType Type;
-        
-        public readonly uint Id;
+        internal ConstructionType Type;
 
-        public Position Center;
+        internal uint Id;
+
+        internal Position Center;
     }
 
-    public class ConstructionType
+    internal abstract class ConstructionType
     {
-        public readonly uint Id;
+        internal uint Id;
 
-        public readonly List<Position> Offsets;
+        internal List<Position> Offsets;
 
-        public readonly Dictionary<ItemType, uint> RequiredItems;
+        internal Dictionary<ItemType, uint> RequiredItems;
+
+        internal ConstructionType(ConstructionTypeInfo info, Dictionary<uint, ItemType> itemTypes)
+        {
+            Id = info.Id;
+            Offsets = info.Offsets;
+            
+            RequiredItems = new Dictionary<ItemType, uint>();
+            
+            foreach (var item in info.RequiredItems)
+            {
+                if (!itemTypes.ContainsKey(item.Key)) 
+                    throw new Exception($"Item type {item.Key} has not downloaded to game");
+                
+                RequiredItems.Add(itemTypes[item.Key], item.Value);
+            }
+        }
+    }
+
+    [Serializable]
+    public abstract class ConstructionTypeInfo
+    {
+        public uint Id { get; set; }
+        public List<Position> Offsets { get; set; }
+        public Dictionary<uint, uint> RequiredItems { get; set; }
+
+        public ConstructionTypeInfo() {}
+
+        internal ConstructionTypeInfo(ConstructionType type)
+        {
+            Id = type.Id;
+            Offsets = type.Offsets;
+            RequiredItems = new Dictionary<uint, uint>();
+            foreach (var pare in type.RequiredItems)
+            {
+                RequiredItems.Add(pare.Key.Id, pare.Value);
+            }
+        }
     }
 }

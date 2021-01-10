@@ -1,17 +1,26 @@
 namespace FactoryStarter.Core.Items
 {
-    public class Pack: Item
+    internal class Pack: Item
     {
-        public PackType PackType => (PackType) Type;
+        internal PackType PackType => (PackType) Type;
 
-        public readonly ItemType ContentType;
+        internal readonly ItemType ContentType;
 
-        public uint Count;
+        internal uint Count;
     }
 
-    public class PackType: ItemType
+    internal class PackType: ItemType
     {
-        public readonly uint Id;
-        public readonly uint MaxCount;
+        internal readonly uint MaxCount;
+
+        internal PackType(PackTypeInfo info) : base(info)
+        {
+            MaxCount = info.MaxCount;
+        }
+    }
+
+    public class PackTypeInfo : ItemTypeInfo
+    {
+        public uint MaxCount;
     }
 }

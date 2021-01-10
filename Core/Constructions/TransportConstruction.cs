@@ -1,12 +1,24 @@
+using System;
+using System.Collections.Generic;
+using FactoryStarter.Core.Items;
+
 namespace FactoryStarter.Core.Constructions
 {
-    public class Transport: Construction
+    internal class Transport: Construction
     {
         public TransportType TransportType => (TransportType) Type;
     }
 
-    public class TransportType : ConstructionType
+    internal class TransportType : ConstructionType
     {
+        internal TransportType(TransportTypeInfo info, Dictionary<uint, ItemType> itemTypes) : base(info, itemTypes) {}
+    }
+
+    [Serializable]
+    public class TransportTypeInfo : ConstructionTypeInfo
+    {
+        public TransportTypeInfo() {}
         
+        internal TransportTypeInfo(TransportType type) : base(type) {}
     }
 }

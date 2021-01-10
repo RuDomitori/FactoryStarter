@@ -2,10 +2,10 @@ using FactoryStarter.Core.Constructions;
 
 namespace FactoryStarter.Core
 {
-    public class Cell
+    internal class Cell
     {
-        public Factory Factory = null;
-        public Logic Logic = null;
-        public Transport Transport = null;
+        internal Factory Factory = null;
+        internal Logic Logic = null;
+        internal Transport Transport = null;
     }
 }
