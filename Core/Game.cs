@@ -7,7 +7,7 @@ namespace FactoryStarter.Core
 {
     public class Game
     {
-        private Level _currentLevel = new Level();
+        private Level _level = new Level();
 
         private Dictionary<uint, FactoryType> _factoryTypes = new Dictionary<uint, FactoryType>();
         private Dictionary<uint, LogicType> _logicTypes = new Dictionary<uint, LogicType>();
@@ -16,16 +16,15 @@ namespace FactoryStarter.Core
         private Dictionary<uint, ItemType> _itemTypes = new Dictionary<uint, ItemType>();
         private Dictionary<uint, PackType> _packTypes = new Dictionary<uint, PackType>();
 
-        public void ChangeLevelSize(uint width, uint height)
-        {
-            _currentLevel.ChangeSize(width, height);
-        }
-        
         public event Level.ChangingSize OnChangingSize
         {
-            add => _currentLevel.OnChangingSize += value;
-            remove => _currentLevel.OnChangingSize -= value;
+            add => _level.OnChangingSize += value;
+            remove => _level.OnChangingSize -= value;
         }
+
+        public LevelEditor LevelEditor => new LevelEditor(_level);
+
+        #region Adding types to the game
 
         public void AddFactoryType(FactoryTypeInfo info)
         {
@@ -36,5 +35,48 @@ namespace FactoryStarter.Core
             
             _factoryTypes.Add(info.Id, factoryType);
         }
+        
+        public void AddLogicType(LogicTypeInfo info)
+        {
+            if (_logicTypes.ContainsKey(info.Id)) 
+                throw new Exception("Logic type with same id already is added");
+
+            var logicType = new LogicType(info, _itemTypes);
+            
+            _logicTypes.Add(info.Id, logicType);
+        }
+        
+        public void AddTransportType(TransportTypeInfo info)
+        {
+            if (_transportTypes.ContainsKey(info.Id)) 
+                throw new Exception("Transport type with same id already is added");
+
+            var transportType = new TransportType(info, _itemTypes);
+            
+            _transportTypes.Add(info.Id, transportType);
+        }
+
+        public void AddItemType(ItemTypeInfo info)
+        {
+            if (_itemTypes.ContainsKey(info.Id)) 
+                throw new Exception("Item type with same id already is added");
+
+            var itemType = new ItemType(info);
+            
+            _itemTypes.Add(info.Id, itemType);
+        }
+        
+        public void AddPackType(PackTypeInfo info)
+        {
+            if (_packTypes.ContainsKey(info.Id)) 
+                throw new Exception("Pack type with same id already is added");
+
+            var packType = new PackType(info);
+            
+            _packTypes.Add(info.Id, packType);
+        }
+
+        #endregion
+        
     }
 }

@@ -15,6 +15,7 @@ namespace FactoryStarter.Core.Constructions
 
     internal abstract class ConstructionType
     {
+        internal string Name;
         internal uint Id;
 
         internal List<Position> Offsets;
@@ -23,6 +24,7 @@ namespace FactoryStarter.Core.Constructions
 
         internal ConstructionType(ConstructionTypeInfo info, Dictionary<uint, ItemType> itemTypes)
         {
+            Name = info.Name;
             Id = info.Id;
             Offsets = info.Offsets;
             
@@ -41,6 +43,7 @@ namespace FactoryStarter.Core.Constructions
     [Serializable]
     public abstract class ConstructionTypeInfo
     {
+        public string Name { get; set; }
         public uint Id { get; set; }
         public List<Position> Offsets { get; set; }
         public Dictionary<uint, uint> RequiredItems { get; set; }
@@ -49,6 +52,7 @@ namespace FactoryStarter.Core.Constructions
 
         internal ConstructionTypeInfo(ConstructionType type)
         {
+            Name = type.Name;
             Id = type.Id;
             Offsets = type.Offsets;
             RequiredItems = new Dictionary<uint, uint>();
