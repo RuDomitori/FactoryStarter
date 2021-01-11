@@ -13,12 +13,7 @@ namespace FactoryStarter.Core
 
         private Dictionary<uint, ItemType> _itemTypes = new Dictionary<uint, ItemType>();
 
-        public event Level.ChangingSize OnChangingSize
-        {
-            add => _level.OnChangingSize += value;
-            remove => _level.OnChangingSize -= value;
-        }
-
+        public EventBinder EventBinder => new EventBinder(_level);
         public LevelEditor LevelEditor => new LevelEditor(_level);
 
         public void AddConstructionType(ConstructionTypeInfo info)
