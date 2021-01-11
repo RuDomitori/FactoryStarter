@@ -12,13 +12,9 @@ namespace FactoryStarter.Core
         private uint _height = 0;
         private Cell[,] _cells = null;
         
-        private List<Factory> _factories = new List<Factory>();
-        private List<Logic> _logics = new List<Logic>();
-        private List<Transport> _transports = new List<Transport>();
+        private List<Construction> _constructions = new List<Construction>();
         
-        internal Dictionary<uint, FactoryType> _availableFactoryTypes = new Dictionary<uint, FactoryType>();
-        internal Dictionary<uint, LogicType> _availableLogicTypes = new Dictionary<uint, LogicType>();
-        internal Dictionary<uint, TransportType> _avalilavleTransportType = new Dictionary<uint, TransportType>();
+        internal Dictionary<uint, ConstructionType> _availableConstructionTypes = new Dictionary<uint, ConstructionType>();
 
         public delegate void ChangingSize(uint width, uint height);
 

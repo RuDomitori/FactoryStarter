@@ -4,7 +4,7 @@ using FactoryStarter.Core.Items;
 
 namespace FactoryStarter.Core.Constructions
 {
-    internal abstract class Construction
+    internal class Construction
     {
         internal ConstructionType Type;
 
@@ -13,7 +13,7 @@ namespace FactoryStarter.Core.Constructions
         internal Position Center;
     }
 
-    internal abstract class ConstructionType
+    internal class ConstructionType
     {
         internal string Name;
         internal uint Id;
@@ -41,7 +41,7 @@ namespace FactoryStarter.Core.Constructions
     }
 
     [Serializable]
-    public abstract class ConstructionTypeInfo
+    public class ConstructionTypeInfo
     {
         public string Name { get; set; }
         public uint Id { get; set; }

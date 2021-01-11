@@ -5,9 +5,9 @@
         static void Main(string[] args)
         {
             var saveLoader = new SaveLoader();
-            var info = saveLoader.LoadFactoryTypeInfo("Factory");
+            var info = saveLoader.LoadConstructionTypeInfo("Factory");
             info.Name = "Factory 2";
-            saveLoader.SaveFactoryTypeInfo(info);
+            saveLoader.SaveConstructionTypeInfo(info);
         }
     }
 }

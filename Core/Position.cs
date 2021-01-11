@@ -4,5 +4,6 @@ namespace FactoryStarter.Core
     {
         public int X { get; set; }
         public int Y { get; set; }
+        public uint Layer { get; set; }
     }
 }
