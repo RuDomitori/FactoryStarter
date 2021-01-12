@@ -16,24 +16,34 @@ namespace FactoryStarter.Core
         public EventBinder EventBinder => new EventBinder(_level);
         public LevelEditor LevelEditor => new LevelEditor(_level);
 
-        public void AddConstructionType(ConstructionTypeInfo info)
+        public void Add(ConstructionTypeInfo info)
         {
-            if (_constructionTypes.ContainsKey(info.Id)) 
+            if (_constructionTypes.ContainsKey(info.Id))
                 throw new Exception("Factory type with same id already is added");
 
             var factoryType = new ConstructionType(info, _itemTypes);
-            
+
             _constructionTypes.Add(info.Id, factoryType);
         }
 
-        public void AddItemType(ItemTypeInfo info)
+        public void Add(IEnumerable<ConstructionTypeInfo> infos) 
         {
-            if (_itemTypes.ContainsKey(info.Id)) 
+            foreach (var info in infos) Add(info);
+        }
+
+        public void Add(ItemTypeInfo info)
+        {
+            if (_itemTypes.ContainsKey(info.Id))
                 throw new Exception("Item type with same id already is added");
 
             var itemType = new ItemType(info);
-            
+
             _itemTypes.Add(info.Id, itemType);
         }
+
+        public void Add(IEnumerable<ItemTypeInfo> infos)
+        {
+            foreach (var info in infos) Add(info);
         }
+    }
 }

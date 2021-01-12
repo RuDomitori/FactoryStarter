@@ -1,16 +1,17 @@
-﻿namespace FactoryStarter.Console
+﻿using FactoryStarter.Core;
+
+namespace FactoryStarter.Console
 {
     class Program
     {
         static void Main(string[] args)
         {
             var saveLoader = new SaveLoader();
-
-            var infos = saveLoader.LoadAllConstructionTypeInfos();
+            var game = new Game();
             
-            foreach (var info in infos) info.Name = "New" + info.Name;
+            game.Add(saveLoader.LoadAllItemTypeInfos());
+            game.Add(saveLoader.LoadAllConstructionTypeInfos());
             
-            saveLoader.SaveAllConstructionTypeInfos(infos);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace FactoryStarter.Core.Items
 
         internal ItemType(ItemTypeInfo info)
         {
+            Name = info.Name;
             Id = info.Id;
             MaxCount = info.MaxCount;
         }
@@ -30,5 +31,4 @@ namespace FactoryStarter.Core.Items
 
         public uint MaxCount { get; set; } = 1;
     }
-    
 }
