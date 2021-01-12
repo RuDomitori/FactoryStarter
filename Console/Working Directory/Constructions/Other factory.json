@@ -1,0 +1,18 @@
+{
+  "Name": "Other factory",
+  "Id": 2,
+  "Offsets": [
+    { "X": -1,  "Y": 1,   "Layer": 3 },
+    { "X": 0,   "Y": 1,   "Layer": 3 },
+    { "X": 1,   "Y": 1,   "Layer": 3 },
+    { "X": -1,  "Y": 0,   "Layer": 3 },
+    { "X": 0,   "Y": 0,   "Layer": 3 },
+    { "X": 1,   "Y": 0,   "Layer": 3 },
+    { "X": -1,  "Y": -1,  "Layer": 3 },
+    { "X": 0,   "Y": -1,  "Layer": 3 },
+    { "X": 1,   "Y": -1,  "Layer": 3 }
+  ],
+  "RequiredItems": {
+    "1": 10
+  }
+}
