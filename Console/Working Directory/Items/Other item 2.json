@@ -1,5 +1,5 @@
 {
     "Name": "Other item 2",
-    "Id": "3",
+    "Id": 3,
     "MaxCount": 32
 }

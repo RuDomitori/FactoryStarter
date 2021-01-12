@@ -5,16 +5,12 @@
         static void Main(string[] args)
         {
             var saveLoader = new SaveLoader();
+
+            var infos = saveLoader.LoadAllConstructionTypeInfos();
             
-            var info = saveLoader.LoadConstructionTypeInfo("Test factory");
-            info.Name = "Test factory 2";
-            info.Id = 4;
-            saveLoader.SaveConstructionTypeInfo(info);
+            foreach (var info in infos) info.Name = "New" + info.Name;
             
-            var info2 = saveLoader.LoadItemTypeInfo("Test item");
-            info2.Name = "Test item 2";
-            info2.Id = 4;
-            saveLoader.SaveItemTypeInfo(info2);
+            saveLoader.SaveAllConstructionTypeInfos(infos);
         }
     }
 }

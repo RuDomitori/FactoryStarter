@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using FactoryStarter.Core.Constructions;
@@ -17,32 +18,58 @@ namespace FactoryStarter.Console
             _jsonSerializerOptions.WriteIndented = true;
         }
 
-        public void SaveConstructionTypeInfo(ConstructionTypeInfo info)
+        public void SaveConstructionTypeInfo(ConstructionTypeInfo info) =>
+            _SaveInfo(info, $"{ConstructionTypesFolder}/{info.Name}.json");
+
+        public void SaveAllConstructionTypeInfos(List<ConstructionTypeInfo> infos)
         {
-            using (FileStream fs = new FileStream($"{ConstructionTypesFolder}/{info.Name}.json", FileMode.Create))
-                JsonSerializer.SerializeAsync(fs, info, _jsonSerializerOptions)
-                    .Wait();
+            foreach (var info in infos) _SaveInfo(info, $"{ConstructionTypesFolder}/{info.Name}.json");
         }
         
-        public ConstructionTypeInfo LoadConstructionTypeInfo(string name)
+        public ConstructionTypeInfo LoadConstructionTypeInfo(string name) =>
+            _LoadInfo<ConstructionTypeInfo>($"{ConstructionTypesFolder}/{name}.json");
+
+        public List<ConstructionTypeInfo> LoadAllConstructionTypeInfos()
         {
-            using (FileStream fs = new FileStream($"{ConstructionTypesFolder}/{name}.json", FileMode.Open))
-                return JsonSerializer.DeserializeAsync<ConstructionTypeInfo>(fs, _jsonSerializerOptions)
-                    .GetAwaiter()
-                    .GetResult();
+            var result = new List<ConstructionTypeInfo>();
+            
+            foreach (var path in Directory.GetFiles(ConstructionTypesFolder))
+                result.Add(_LoadInfo<ConstructionTypeInfo>(path));
+
+            return result;
         }
 
-        public void SaveItemTypeInfo(ItemTypeInfo info)
+        public void SaveItemTypeInfo(ItemTypeInfo info) =>
+            _SaveInfo(info, $"{ItemTypesFolder}/{info.Name}.json");
+
+        public void SaveAllItemTypeInfos(List<ItemTypeInfo> infos)
         {
-            using (FileStream fs = new FileStream($"{ItemTypesFolder}/{info.Name}.json", FileMode.Create))
+            foreach (var info in infos) _SaveInfo(info, $"{ItemTypesFolder}/{info.Name}.json");
+        }
+        
+        public ItemTypeInfo LoadItemTypeInfo(string name) =>
+            _LoadInfo<ItemTypeInfo>($"{ItemTypesFolder}/{name}.json");
+
+        public List<ItemTypeInfo> LoadAllItemTypeInfos()
+        {
+            var infos = new List<ItemTypeInfo>();
+
+            foreach (var path in Directory.GetFiles(ItemTypesFolder)) infos.Add(_LoadInfo<ItemTypeInfo>(path));
+
+            return infos;
+        }
+        
+        private void _SaveInfo<T>(T info, string path)
+        {
+            using (var fs = File.Create(path))
                 JsonSerializer.SerializeAsync(fs, info, _jsonSerializerOptions)
                     .Wait();
         }
-        
-        public ItemTypeInfo LoadItemTypeInfo(string name)
+
+        private T _LoadInfo<T>(string path)
         {
-            using (FileStream fs = File.OpenRead($"{ItemTypesFolder}/{name}.json"))
-                return JsonSerializer.DeserializeAsync<ItemTypeInfo>(fs, _jsonSerializerOptions)
+            using (var fs = File.OpenRead(path))
+                return JsonSerializer.DeserializeAsync<T>(fs, _jsonSerializerOptions)
                     .GetAwaiter()
                     .GetResult();
         }
