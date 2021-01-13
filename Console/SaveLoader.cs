@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.Json;
 using FactoryStarter.Core.Constructions;
 using FactoryStarter.Core.Items;
+using FactoryStarter.Core.Levels;
 
 namespace FactoryStarter.Console
 {
@@ -10,7 +11,8 @@ namespace FactoryStarter.Console
     {
         private JsonSerializerOptions _jsonSerializerOptions;
         public string ConstructionTypesFolder = "./Constructions";
-        public string ItemTypesFolder = "./Items"; 
+        public string ItemTypesFolder = "./Items";
+        public string LevelsFolder = "./Levels";
         public SaveLoader()
         {
             _jsonSerializerOptions = new JsonSerializerOptions();
@@ -58,6 +60,8 @@ namespace FactoryStarter.Console
 
             return infos;
         }
+
+        public void SaveLevelInfo(LevelInfo info) => _SaveInfo(info, $"{LevelsFolder}/{info.Name}.json");
         
         private void _SaveInfo<T>(T info, string path)
         {

@@ -2,11 +2,11 @@
   "Name": "Test factory",
   "Id": 1,
   "Offsets": [
-    { "X": 0,   "Y": 1,   "Layer": 3 },
-    { "X": -1,  "Y": 0,   "Layer": 3 },
-    { "X": 0,   "Y": 0,   "Layer": 3 },
-    { "X": 1,   "Y": 0,   "Layer": 3 },
-    { "X": 0,   "Y": -1,  "Layer": 3 }
+    { "X": 0,   "Y": 1,   "Layer": 2 },
+    { "X": -1,  "Y": 0,   "Layer": 2 },
+    { "X": 0,   "Y": 0,   "Layer": 2 },
+    { "X": 1,   "Y": 0,   "Layer": 2 },
+    { "X": 0,   "Y": -1,  "Layer": 2 }
   ],
   "RequiredItems": {
     "1": 10,

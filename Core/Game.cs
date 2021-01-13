@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using FactoryStarter.Core.Constructions;
 using FactoryStarter.Core.Items;
+using FactoryStarter.Core.Levels;
 
 namespace FactoryStarter.Core
 {
@@ -11,10 +12,25 @@ namespace FactoryStarter.Core
 
         private Dictionary<uint, ConstructionType> _constructionTypes = new Dictionary<uint, ConstructionType>();
 
+        internal ConstructionType GetConstructionTypeById(uint id)
+        {
+            if (!_constructionTypes.ContainsKey(id))
+                throw new Exception($"Construction type with id {id} is not loaded");
+
+            return _constructionTypes[id];
+        }
+
         private Dictionary<uint, ItemType> _itemTypes = new Dictionary<uint, ItemType>();
 
         public EventBinder EventBinder => new EventBinder(_level);
-        public LevelEditor LevelEditor => new LevelEditor(_level);
+        public LevelEditor LevelEditor => new LevelEditor(this, _level);
+        
+        public LevelInfo LevelInfo
+        {
+            get => new LevelInfo(_level);
+        }
+
+        #region Adding types
 
         public void Add(ConstructionTypeInfo info)
         {
@@ -45,5 +61,7 @@ namespace FactoryStarter.Core
         {
             foreach (var info in infos) Add(info);
         }
+
+        #endregion
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FactoryStarter.Core.Items;
+using FactoryStarter.Core.Positions;
 
 namespace FactoryStarter.Core.Constructions
 {
@@ -9,7 +10,7 @@ namespace FactoryStarter.Core.Constructions
         internal string Name;
         internal uint Id;
 
-        internal List<Position> Offsets;
+        internal List<Position3> Offsets;
 
         internal Dictionary<ItemType, uint> RequiredItems;
 
@@ -29,5 +30,6 @@ namespace FactoryStarter.Core.Constructions
                 RequiredItems.Add(itemTypes[item.Key], item.Value);
             }
         }
+        
     }
 }

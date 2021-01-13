@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FactoryStarter.Core.Positions;
 
 namespace FactoryStarter.Core.Constructions
 {
@@ -8,7 +9,7 @@ namespace FactoryStarter.Core.Constructions
     {
         public string Name { get; set; }
         public uint Id { get; set; }
-        public List<Position> Offsets { get; set; }
+        public List<Position3> Offsets { get; set; }
         public Dictionary<uint, uint> RequiredItems { get; set; }
 
         public ConstructionTypeInfo() {}
