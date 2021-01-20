@@ -9,22 +9,24 @@ namespace FactoryStarter.Console
         {
             var saveLoader = new SaveLoader();
             var game = new Game();
-            
-            game.Add(saveLoader.LoadAllItemTypeInfos());
-            game.Add(saveLoader.LoadAllConstructionTypeInfos());
 
+            var typesContainer = game.TypesContainer;
             var binder = game.EventBinder;
             var editor = game.LevelEditor;
 
-            binder.OnChangingSize += (w, h) => 
+            typesContainer.Add(saveLoader.LoadAllItemTypeInfos());
+            typesContainer.Add(saveLoader.LoadAllConstructionTypeInfos());
+            
+            binder.OnChangingSize += (w, h) =>
                 System.Console.WriteLine($"Level size has been changed to {w}, {h}");
 
             binder.OnBuilding += (id, center) =>
                 System.Console.WriteLine($"Construction with id {id} has been built on {center.X}, {center.Y}");
-            
-            editor.ChangeLevelSize(9,9);
-            editor.BuildConstruction(1, new Position2(4, 4));
 
+            var info = saveLoader.LoadLevelInfo("Test level");
+            game.RestoreLevel(info);
+            
+            editor.BuildConstruction(2, new Position2(6, 6));
             saveLoader.SaveLevelInfo(game.LevelInfo);
         }
     }

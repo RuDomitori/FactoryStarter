@@ -4,18 +4,18 @@ namespace FactoryStarter.Core.Levels
 {
     public class LevelEditor
     {
-        private Level _level;
-        private readonly Game _game;
+        private readonly Level _level;
+        private readonly TypesContainer _typesContainer;
         
-        internal LevelEditor(Game game, Level level)
+        internal LevelEditor(TypesContainer typesContainer, Level level)
         {
             _level = level;
-            _game = game;
+            _typesContainer = typesContainer;
         }
 
         public void ChangeLevelSize(uint width, uint height) => _level.ChangeSize(width, height);
 
         public void BuildConstruction(uint typeId, Position2 center) =>
-            _level.Build(_game.GetConstructionTypeById(typeId), center);
+            _level.Build(_typesContainer.GetConstructionType(typeId), center);
     }
 }

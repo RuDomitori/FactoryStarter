@@ -20,6 +20,8 @@ namespace FactoryStarter.Console
             _jsonSerializerOptions.WriteIndented = true;
         }
 
+        #region ConstructionTypes
+
         public void SaveConstructionTypeInfo(ConstructionTypeInfo info) =>
             _SaveInfo(info, $"{ConstructionTypesFolder}/{info.Name}.json");
 
@@ -41,6 +43,10 @@ namespace FactoryStarter.Console
             return result;
         }
 
+        #endregion
+
+        #region ItemTypes
+
         public void SaveItemTypeInfo(ItemTypeInfo info) =>
             _SaveInfo(info, $"{ItemTypesFolder}/{info.Name}.json");
 
@@ -60,8 +66,12 @@ namespace FactoryStarter.Console
 
             return infos;
         }
-
+        
+        #endregion
+        
         public void SaveLevelInfo(LevelInfo info) => _SaveInfo(info, $"{LevelsFolder}/{info.Name}.json");
+
+        public LevelInfo LoadLevelInfo(string name) => _LoadInfo<LevelInfo>($"{LevelsFolder}/{name}.json");
         
         private void _SaveInfo<T>(T info, string path)
         {

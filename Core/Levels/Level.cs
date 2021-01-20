@@ -15,6 +15,34 @@ namespace FactoryStarter.Core.Levels
         internal uint Height = 1;
         internal Cell[,] Cells = new Cell[1, 1];
         
+        internal void Restore(LevelInfo info, TypesContainer container)
+        {
+            Name = info.Name;
+            Id = info.Id;
+            Width = info.Width;
+            Height = info.Height;
+            Cells = new Cell[Width, Height];
+            _lastId = 0;
+            
+            AvailableConstructionTypes.Clear();
+            
+            foreach (var id in info.AvailableConstructionTypes)
+                AvailableConstructionTypes[id] = container.GetConstructionType(id);
+
+            
+            Constructions.Clear();
+            foreach (var constructionInfo in info.Constructions)
+            {
+                var type = container.GetConstructionType(constructionInfo.TypeId);
+                if (!CheckPlace(type, constructionInfo.Center))
+                    throw new Exception($"Failed to build construction {type.Name}");
+                    
+                var construction = new Construction(constructionInfo, container);
+                Constructions.Add(construction);
+                if (_lastId < construction.Id) _lastId = construction.Id;
+            }
+        }
+        
         internal List<Construction> Constructions = new List<Construction>();
         
         internal Dictionary<uint, ConstructionType> AvailableConstructionTypes = new Dictionary<uint, ConstructionType>();

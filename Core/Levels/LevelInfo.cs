@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FactoryStarter.Core.Constructions;
-using System.Collections.Generic;
 using System.Linq;
-using FactoryStarter.Core.Items;
 
 namespace FactoryStarter.Core.Levels
 {

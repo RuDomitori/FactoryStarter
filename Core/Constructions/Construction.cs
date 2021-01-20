@@ -16,5 +16,12 @@ namespace FactoryStarter.Core.Constructions
             Type = type;
             Center = center;
         }
+
+        internal Construction(ConstructionInfo info, TypesContainer container)
+        {
+            Type = container.GetConstructionType(info.TypeId);
+            Id = info.Id;
+            Center = info.Center;
+        }
     }
 }
