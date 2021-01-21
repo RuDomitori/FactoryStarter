@@ -10,32 +10,32 @@ namespace FactoryStarter.Core
         private readonly Dictionary<uint, ConstructionType> _constructions = new Dictionary<uint, ConstructionType>();
         private readonly Dictionary<uint, ItemType> _items = new Dictionary<uint, ItemType>();
         
-        public void Add(ConstructionTypeInfo info)
+        public void Add(ConstructionTypeDto dto)
         {
-            if (_constructions.ContainsKey(info.Id))
+            if (_constructions.ContainsKey(dto.Id))
                 throw new Exception("Factory type with same id already is added");
 
-            var factoryType = new ConstructionType(info, _items);
+            var factoryType = new ConstructionType(dto, this);
 
-            _constructions.Add(info.Id, factoryType);
+            _constructions.Add(dto.Id, factoryType);
         }
 
-        public void Add(IEnumerable<ConstructionTypeInfo> infos) 
+        public void Add(IEnumerable<ConstructionTypeDto> infos) 
         {
             foreach (var info in infos) Add(info);
         }
 
-        public void Add(ItemTypeInfo info)
+        public void Add(ItemTypeDto dto)
         {
-            if (_items.ContainsKey(info.Id))
+            if (_items.ContainsKey(dto.Id))
                 throw new Exception("Item type with same id already is added");
 
-            var itemType = new ItemType(info);
+            var itemType = new ItemType(dto);
 
-            _items.Add(info.Id, itemType);
+            _items.Add(dto.Id, itemType);
         }
 
-        public void Add(IEnumerable<ItemTypeInfo> infos)
+        public void Add(IEnumerable<ItemTypeDto> infos)
         {
             foreach (var info in infos) Add(info);
         }

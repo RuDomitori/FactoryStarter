@@ -6,21 +6,18 @@ using System.Linq;
 namespace FactoryStarter.Core.Levels
 {
     [Serializable]
-    public class LevelInfo
+    public class LevelDto
     {
         public string Name { get; set; }
         public uint Id { get; set; }
-        
         public uint Width { get; set; }
-        
         public uint Height { get; set; }
         public List<uint> AvailableConstructionTypes { get; set; }
-        
-        public List<ConstructionInfo> Constructions { get; set; }
+        public List<ConstructionDto> Constructions { get; set; }
 
-        public LevelInfo() {}
+        public LevelDto() {}
 
-        internal LevelInfo(Level level)
+        internal LevelDto(Level level)
         {
             Name = level.Name;
             Id = level.Id;
@@ -32,7 +29,7 @@ namespace FactoryStarter.Core.Levels
                 .ToList();
             Constructions = level
                 .Constructions
-                .Select(c => new ConstructionInfo(c))
+                .Select(c => new ConstructionDto(c))
                 .ToList();
         }
     }

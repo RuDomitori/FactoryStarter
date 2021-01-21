@@ -5,7 +5,7 @@ using FactoryStarter.Core.Positions;
 
 namespace FactoryStarter.Core.Levels
 {
-    public class Level
+    internal class Level
     {
         internal uint Id;
         internal string Name = "New level";
@@ -14,56 +14,74 @@ namespace FactoryStarter.Core.Levels
         internal uint Width = 1;
         internal uint Height = 1;
         internal Cell[,] Cells = new Cell[1, 1];
+
+        private readonly EventsContainer _events;
+        private readonly TypesContainer _types;
         
-        internal void Restore(LevelInfo info, TypesContainer container)
+        internal readonly List<Construction> Constructions = new List<Construction>();
+        
+        internal readonly Dictionary<uint, ConstructionType> AvailableConstructionTypes = 
+            new Dictionary<uint, ConstructionType>();
+
+        internal Level(TypesContainer types, EventsContainer events)
         {
-            Name = info.Name;
-            Id = info.Id;
-            Width = info.Width;
-            Height = info.Height;
-            Cells = new Cell[Width, Height];
+            _types = types;
+            _events = events;
+        }
+        
+        internal void Restore(LevelDto dto)
+        {
+            Name = dto.Name;
+            Id = dto.Id;
+            ChangeSize(dto.Width, dto.Height);
             _lastId = 0;
             
             AvailableConstructionTypes.Clear();
             
-            foreach (var id in info.AvailableConstructionTypes)
-                AvailableConstructionTypes[id] = container.GetConstructionType(id);
-
+            foreach (var id in dto.AvailableConstructionTypes)
+                AvailableConstructionTypes[id] = _types.GetConstructionType(id);
             
             Constructions.Clear();
-            foreach (var constructionInfo in info.Constructions)
+            
+            foreach (var constructionInfo in dto.Constructions)
             {
-                var type = container.GetConstructionType(constructionInfo.TypeId);
-                if (!CheckPlace(type, constructionInfo.Center))
+                var id = constructionInfo.Id;
+                var type = _types.GetConstructionType(constructionInfo.TypeId);
+                var center = constructionInfo.Center;
+                
+                if (!CheckPlace(type, center))
                     throw new Exception($"Failed to build construction {type.Name}");
                     
-                var construction = new Construction(constructionInfo, container);
+                var construction = new Construction(constructionInfo, _types);
                 Constructions.Add(construction);
-                if (_lastId < construction.Id) _lastId = construction.Id;
+                
+                foreach (var offset in type.Offsets)
+                    Cells[center.X + offset.X, center.Y + offset.Y][offset.Layer] = construction;
+
+                _events.OnConstructionBuilt(new EventsContainer.ConstructionBuiltEventArgs()
+                {
+                    Id = id, TypeId = type.Id, Center = center
+                });
+                
+                if (_lastId < id) _lastId = id;
             }
         }
         
-        internal List<Construction> Constructions = new List<Construction>();
-        
-        internal Dictionary<uint, ConstructionType> AvailableConstructionTypes = new Dictionary<uint, ConstructionType>();
-
-        public delegate void ChangingSize(uint width, uint height);
-
-        internal event ChangingSize OnChangingSize;
         internal void ChangeSize(uint width, uint height)
         {
             if (width == 0 || height == 0) throw new ArgumentException("Size args must be positive");
             
             Width = width;
             Height = height;
-            
-            GenerateEmptyCells();
 
-            OnChangingSize?.Invoke(width, height);
+            Cells = new Cell[Width, Height];
+
+            _events.OnSizeChanged(new EventsContainer.SizeChangedEventArgs()
+            {
+                Width = width, Height = height
+            });
         }
-        
-        private void GenerateEmptyCells() => Cells = new Cell[Width, Height];
-        
+
         internal bool CheckPlace(ConstructionType type, Position2 center)
         {
             foreach (var offset in type.Offsets)
@@ -76,10 +94,7 @@ namespace FactoryStarter.Core.Levels
 
             return true;
         }
-
-        public delegate void Building(uint typeId, Position2 center);
-
-        public event Building OnBuilding;
+        
         internal void Build(ConstructionType type, Position2 center)
         {
             if (!CheckPlace(type, center)) throw new Exception($"Failed to build {type.Name}");
@@ -91,7 +106,10 @@ namespace FactoryStarter.Core.Levels
                 Cells[center.X + offset.X, center.Y + offset.Y][offset.Layer] = construction;
             }
 
-            OnBuilding?.Invoke(type.Id, center);
+            _events.OnConstructionBuilt(new EventsContainer.ConstructionBuiltEventArgs()
+            {
+                Id = construction.Id, TypeId = type.Id, Center = center
+            });
         }
     }
 }

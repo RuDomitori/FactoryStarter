@@ -9,26 +9,17 @@ namespace FactoryStarter.Core.Constructions
     {
         internal string Name;
         internal uint Id;
-
         internal List<Position3> Offsets;
+        internal Dictionary<ItemType, uint> RequiredItems = new Dictionary<ItemType, uint>();
 
-        internal Dictionary<ItemType, uint> RequiredItems;
-
-        internal ConstructionType(ConstructionTypeInfo info, Dictionary<uint, ItemType> itemTypes)
+        internal ConstructionType(ConstructionTypeDto dto, TypesContainer types)
         {
-            Name = info.Name;
-            Id = info.Id;
-            Offsets = info.Offsets;
+            Name = dto.Name;
+            Id = dto.Id;
+            Offsets = dto.Offsets;
             
-            RequiredItems = new Dictionary<ItemType, uint>();
-            
-            foreach (var item in info.RequiredItems)
-            {
-                if (!itemTypes.ContainsKey(item.Key)) 
-                    throw new Exception($"Item type {item.Key} has not downloaded to game");
-                
-                RequiredItems.Add(itemTypes[item.Key], item.Value);
-            }
+            foreach (var item in dto.RequiredItems)
+                RequiredItems.Add(types.GetItemType(item.Key), item.Value);
         }
         
     }

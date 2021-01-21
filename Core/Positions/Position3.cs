@@ -1,5 +1,8 @@
+using System;
+
 namespace FactoryStarter.Core.Positions
 {
+    [Serializable]
     public struct Position3
     {
         public int X { get; set; }

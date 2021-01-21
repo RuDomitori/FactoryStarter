@@ -5,9 +5,7 @@ namespace FactoryStarter.Core.Constructions
     internal class Construction
     {
         internal ConstructionType Type;
-
         internal uint Id;
-
         internal Position2 Center;
 
         internal Construction(ConstructionType type, Position2 center, uint id)
@@ -17,11 +15,11 @@ namespace FactoryStarter.Core.Constructions
             Center = center;
         }
 
-        internal Construction(ConstructionInfo info, TypesContainer container)
+        internal Construction(ConstructionDto dto, TypesContainer types)
         {
-            Type = container.GetConstructionType(info.TypeId);
-            Id = info.Id;
-            Center = info.Center;
+            Type = types.GetConstructionType(dto.TypeId);
+            Id = dto.Id;
+            Center = dto.Center;
         }
     }
 }
