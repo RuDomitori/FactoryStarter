@@ -26,10 +26,8 @@ namespace FactoryStarter.Console
                     $"Construction with id {args.Id} has been built on {args.Center.X}, {args.Center.Y}"
                     );
 
-            var info = saveLoader.LoadLevel("Test level");
-            game.RestoreLevel(info);
-            
-            editor.BuildConstruction(2, new Position2(6, 6));
+            var level = saveLoader.LoadLevel("Test level");
+            game.RestoreLevel(level);
             saveLoader.Save(game.LevelDto);
         }
     }

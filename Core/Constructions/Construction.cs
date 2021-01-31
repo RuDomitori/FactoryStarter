@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using FactoryStarter.Core.Items;
 using FactoryStarter.Core.Positions;
 
 namespace FactoryStarter.Core.Constructions
@@ -7,6 +10,7 @@ namespace FactoryStarter.Core.Constructions
         internal ConstructionType Type;
         internal uint Id;
         internal Position2 Center;
+        internal List<Item> Items = new List<Item>();
 
         internal Construction(ConstructionType type, Position2 center, uint id)
         {
@@ -20,6 +24,9 @@ namespace FactoryStarter.Core.Constructions
             Type = types.GetConstructionType(dto.TypeId);
             Id = dto.Id;
             Center = dto.Center;
+            Items = dto.Items
+                ?.Select(dto => new Item(dto, types))
+                ?.ToList() ?? new List<Item>();
         }
     }
 }

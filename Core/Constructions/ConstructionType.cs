@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using FactoryStarter.Core.Items;
 using FactoryStarter.Core.Positions;
 
@@ -7,19 +7,24 @@ namespace FactoryStarter.Core.Constructions
 {
     internal class ConstructionType
     {
-        internal string Name;
-        internal uint Id;
-        internal List<Position3> Offsets;
-        internal Dictionary<ItemType, uint> RequiredItems = new Dictionary<ItemType, uint>();
+        internal readonly string Name;
+        internal readonly uint Id;
+        internal readonly List<Position3> Offsets;
+        internal readonly Dictionary<ItemType, uint> RequiredItems = new Dictionary<ItemType, uint>();
+        internal readonly uint StorageCapacity; 
 
         internal ConstructionType(ConstructionTypeDto dto, TypesContainer types)
         {
             Name = dto.Name;
             Id = dto.Id;
-            Offsets = dto.Offsets;
+            Offsets = dto.Offsets
+                .Select(x=>x)
+                .ToList();
             
-            foreach (var item in dto.RequiredItems)
-                RequiredItems.Add(types.GetItemType(item.Key), item.Value);
+            StorageCapacity = dto.StorageCapacity;
+            
+            foreach (var (key, value) in dto.RequiredItems)
+                RequiredItems.Add(types.GetItemType(key), value);
         }
         
     }

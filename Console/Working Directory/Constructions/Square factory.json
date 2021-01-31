@@ -14,5 +14,6 @@
   ],
   "RequiredItems": {
     "1": 10
-  }
+  },
+  "StorageCapacity" : 8
 }
