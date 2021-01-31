@@ -15,7 +15,7 @@ namespace FactoryStarter.Core.Levels
         internal uint Height = 1;
         internal Cell[,] Cells = new Cell[1, 1];
 
-        private readonly EventsContainer _events;
+        internal ILevelEventHandler EventHandler;
         private readonly TypesContainer _types;
         
         internal readonly List<Construction> Constructions = new List<Construction>();
@@ -23,12 +23,8 @@ namespace FactoryStarter.Core.Levels
         internal readonly Dictionary<uint, ConstructionType> AvailableConstructionTypes = 
             new Dictionary<uint, ConstructionType>();
 
-        internal Level(TypesContainer types, EventsContainer events)
-        {
-            _types = types;
-            _events = events;
-        }
-        
+        internal Level(TypesContainer types) => _types = types;
+
         internal void Restore(LevelDto dto)
         {
             Name = dto.Name;
@@ -58,10 +54,7 @@ namespace FactoryStarter.Core.Levels
                 foreach (var offset in type.Offsets)
                     Cells[center.X + offset.X, center.Y + offset.Y][offset.Layer] = construction;
 
-                _events.OnConstructionBuilt(new EventsContainer.ConstructionBuiltEventArgs()
-                {
-                    Id = id, TypeId = type.Id, Center = center
-                });
+                EventHandler.OnConstructionBuilt(type.Id, id, center);
                 
                 if (_lastId < id) _lastId = id;
             }
@@ -76,10 +69,7 @@ namespace FactoryStarter.Core.Levels
 
             Cells = new Cell[Width, Height];
 
-            _events.OnSizeChanged(new EventsContainer.SizeChangedEventArgs()
-            {
-                Width = width, Height = height
-            });
+            EventHandler.OnSizeChanged(width, height);
         }
 
         internal bool CheckPlace(ConstructionType type, Position2 center)
@@ -106,10 +96,7 @@ namespace FactoryStarter.Core.Levels
                 Cells[center.X + offset.X, center.Y + offset.Y][offset.Layer] = construction;
             }
 
-            _events.OnConstructionBuilt(new EventsContainer.ConstructionBuiltEventArgs()
-            {
-                Id = construction.Id, TypeId = type.Id, Center = center
-            });
+            EventHandler.OnConstructionBuilt(type.Id, construction.Id, center);
         }
     }
 }
