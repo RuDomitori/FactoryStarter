@@ -6,7 +6,7 @@ namespace FactoryStarter.Core.Items
         internal uint Count;
 
         internal Item(){}
-        internal Item(ItemDto dto, TypesContainer types)
+        internal Item(ItemDto dto, TypeRepository types)
         {
             Type = types.GetItemType(dto.TypeId);
             Count = dto.Count;

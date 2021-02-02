@@ -5,18 +5,21 @@ namespace FactoryStarter.Core
     public class Game
     {
         private readonly Level _level;
-        
-        public readonly TypesContainer Types = new TypesContainer();
+
+        private readonly IDtoRepository _dtoRepository;
+        internal readonly TypeRepository Types;
         public readonly LevelEditor Editor;
 
-        public Game()
+        public Game(IDtoRepository dtoRepository)
         {
+            _dtoRepository = dtoRepository;
+            Types = new TypeRepository(_dtoRepository);
             _level = new Level(Types);
             Editor = new LevelEditor(Types, _level);
         }
-        
-        public LevelDto LevelDto => new LevelDto(_level);
-        public void RestoreLevel(LevelDto dto) => _level.Restore(dto);
+
+        public void SaveLevel() => _dtoRepository.Save(new LevelDto(_level));
+        public void RestoreLevel(uint id) => _level.Restore(_dtoRepository.GetLevel(id));
 
         public void SetLevelEventHandler(ILevelEventHandler handler) => _level.EventHandler = handler;
     }

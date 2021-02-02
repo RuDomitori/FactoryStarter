@@ -8,20 +8,17 @@ namespace FactoryStarter.Console
     {
         static void Main(string[] args)
         {
-            var saveLoader = new SaveLoader();
-            var game = new Game();
+            var game = new Game(new DtoRepository());
 
-            var typesContainer = game.Types;
             var editor = game.Editor;
-
-            typesContainer.Add(saveLoader.LoadAllItemTypes());
-            typesContainer.Add(saveLoader.LoadAllConstructionTypes());
             
             game.SetLevelEventHandler(new LevelEventHandler());
             
-            var level = saveLoader.LoadLevel("Test level");
-            game.RestoreLevel(level);
-            saveLoader.Save(game.LevelDto);
+            editor.ChangeLevelSize(9, 9);
+            editor.BuildConstruction(1, new Position2(4, 4));
+            editor.BuildConstruction(2, new Position2(7, 7));
+            
+            game.SaveLevel();
         }
     }
 }

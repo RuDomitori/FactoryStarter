@@ -13,7 +13,7 @@ namespace FactoryStarter.Core.Constructions
         internal readonly Dictionary<ItemType, uint> RequiredItems = new Dictionary<ItemType, uint>();
         internal readonly uint StorageCapacity; 
 
-        internal ConstructionType(ConstructionTypeDto dto, TypesContainer types)
+        internal ConstructionType(ConstructionTypeDto dto, TypeRepository types)
         {
             Name = dto.Name;
             Id = dto.Id;

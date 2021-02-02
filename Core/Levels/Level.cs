@@ -16,14 +16,14 @@ namespace FactoryStarter.Core.Levels
         internal Cell[,] Cells = new Cell[1, 1];
 
         internal ILevelEventHandler EventHandler;
-        private readonly TypesContainer _types;
+        private readonly TypeRepository _types;
         
         internal readonly List<Construction> Constructions = new List<Construction>();
         
         internal readonly Dictionary<uint, ConstructionType> AvailableConstructionTypes = 
             new Dictionary<uint, ConstructionType>();
 
-        internal Level(TypesContainer types) => _types = types;
+        internal Level(TypeRepository types) => _types = types;
 
         internal void Restore(LevelDto dto)
         {

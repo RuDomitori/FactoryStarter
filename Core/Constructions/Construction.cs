@@ -19,7 +19,7 @@ namespace FactoryStarter.Core.Constructions
             Center = center;
         }
 
-        internal Construction(ConstructionDto dto, TypesContainer types)
+        internal Construction(ConstructionDto dto, TypeRepository types)
         {
             Type = types.GetConstructionType(dto.TypeId);
             Id = dto.Id;
