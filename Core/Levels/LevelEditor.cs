@@ -1,3 +1,4 @@
+using FactoryStarter.Core.Items;
 using FactoryStarter.Core.Positions;
 
 namespace FactoryStarter.Core.Levels
@@ -17,5 +18,9 @@ namespace FactoryStarter.Core.Levels
 
         public void BuildConstruction(uint typeId, Position2 center) =>
             _level.Build(_typeRepository.GetConstructionType(typeId), center);
+
+        public void InsertItem(uint constructionId, int slot, ItemDto dto = null) =>
+            _level.GetConstruction(constructionId)
+                .InsertItem(slot, dto == null ? null : new Item(dto, _typeRepository));
     }
 }

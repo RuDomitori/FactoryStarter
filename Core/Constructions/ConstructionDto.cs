@@ -22,7 +22,7 @@ namespace FactoryStarter.Core.Constructions
             Id = construction.Id;
             Center = construction.Center;
             Items = construction.Items
-                .Select(item => new ItemDto(item))
+                .Select(item => item == null ? null : new ItemDto(item))
                 .ToList();
         }
     }

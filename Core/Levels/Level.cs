@@ -98,5 +98,15 @@ namespace FactoryStarter.Core.Levels
 
             EventHandler.OnConstructionBuilt(type.Id, construction.Id, center);
         }
+
+        internal Construction GetConstruction(uint id)
+        {   
+            var construction = Constructions.Find(x => x.Id == id);
+            
+            if (construction == null) 
+                throw new Exception($"Construction with id {id} is not found");
+
+            return construction;
+        }
     }
 }

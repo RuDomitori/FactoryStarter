@@ -1,5 +1,5 @@
 ﻿using FactoryStarter.Core;
-using FactoryStarter.Core.Levels;
+using FactoryStarter.Core.Items;
 using FactoryStarter.Core.Positions;
 
 namespace FactoryStarter.Console
@@ -9,16 +9,18 @@ namespace FactoryStarter.Console
         static void Main(string[] args)
         {
             var game = new Game(new DtoRepository());
-
             var editor = game.Editor;
             
-            game.SetLevelEventHandler(new LevelEventHandler());
+            game.SetLevelEventHandler(new LevelEventHandler(game));
             
             editor.ChangeLevelSize(9, 9);
             editor.BuildConstruction(1, new Position2(4, 4));
             editor.BuildConstruction(2, new Position2(7, 7));
+            editor.InsertItem(1, 1, new ItemDto(1, 4));
+            
             
             game.SaveLevel();
+            game.RestoreLevel(0);
         }
     }
 }

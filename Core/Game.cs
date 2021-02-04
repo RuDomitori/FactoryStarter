@@ -1,3 +1,4 @@
+using FactoryStarter.Core.Constructions;
 using FactoryStarter.Core.Levels;
 
 namespace FactoryStarter.Core
@@ -22,5 +23,8 @@ namespace FactoryStarter.Core
         public void RestoreLevel(uint id) => _level.Restore(_dtoRepository.GetLevel(id));
 
         public void SetLevelEventHandler(ILevelEventHandler handler) => _level.EventHandler = handler;
+
+        public void SetConstructionEventHandler(uint id, IConstructionEventHandler handler) =>
+            _level.GetConstruction(id).EventHandler = handler;
     }
 }
