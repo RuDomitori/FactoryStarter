@@ -9,10 +9,10 @@ namespace FactoryStarter.Core.Levels
     public class LevelDto
     {
         public string Name { get; set; }
-        public uint Id { get; set; }
-        public uint Width { get; set; }
-        public uint Height { get; set; }
-        public List<uint> AvailableConstructionTypes { get; set; }
+        public int Id { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public List<int> AvailableConstructionTypes { get; set; }
         public List<ConstructionDto> Constructions { get; set; }
 
         public LevelDto() {}

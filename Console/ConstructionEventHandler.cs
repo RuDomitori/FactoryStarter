@@ -1,21 +1,24 @@
 using FactoryStarter.Core.Constructions;
 using FactoryStarter.Core.Items;
 
-namespace FactoryStarter.Console
-{
-    public class ConstructionEventHandler: IConstructionEventHandler
-    {
-        private readonly uint _constructionId;
+namespace FactoryStarter.Console {
+    public class ConstructionEventHandler : IConstructionEventHandler {
+        private readonly int _constructionId;
 
-        public ConstructionEventHandler(uint constructionId) => this._constructionId = constructionId;
+        public ConstructionEventHandler(int constructionId) => _constructionId = constructionId;
 
-        public void OnItemInserted(int slot, ItemDto item)
-        {
+        public void OnItemBunchAdded(ItemBunchDto itemBunch) {
             System.Console.WriteLine(
-                $"[ItemInserted] " +
+                $"[ItemBunchAdded] " +
                 $"constructionId: {_constructionId}, " +
-                $"slot: {slot}, " +
-                $"Item: {{Id: {item.TypeId}, Count: {item.Count}}}");
+                $"Item: {{Id: {itemBunch.TypeId}, Count: {itemBunch.Count}}}");
+        }
+
+        public void OnItemBunchRemoved(ItemBunchDto itemBunch) {
+            System.Console.WriteLine(
+                $"[ItemBunchRemoved] " +
+                $"constructionId: {_constructionId}, " +
+                $"Item: {{Id: {itemBunch.TypeId}, Count: {itemBunch.Count}}}");
         }
     }
 }

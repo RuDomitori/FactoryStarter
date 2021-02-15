@@ -9,10 +9,10 @@ namespace FactoryStarter.Core.Constructions
     [Serializable]
     public class ConstructionDto
     {
-        public uint TypeId { get; set; }
-        public uint Id { get; set; }
+        public int TypeId { get; set; }
+        public int Id { get; set; }
         public Position2 Center { get; set; }
-        public List<ItemDto> Items { get; set; }
+        public List<ItemBunchDto> Items { get; set; }
         
         public ConstructionDto() {}
         
@@ -22,7 +22,7 @@ namespace FactoryStarter.Core.Constructions
             Id = construction.Id;
             Center = construction.Center;
             Items = construction.Items
-                .Select(item => item == null ? null : new ItemDto(item))
+                .Select(pair => new ItemBunchDto(pair.Value))
                 .ToList();
         }
     }

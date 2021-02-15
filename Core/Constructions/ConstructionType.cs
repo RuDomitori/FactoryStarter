@@ -8,11 +8,11 @@ namespace FactoryStarter.Core.Constructions
     internal class ConstructionType
     {
         internal readonly string Name;
-        internal readonly uint Id;
+        internal readonly int Id;
         internal readonly List<Position3> Offsets;
-        internal readonly Dictionary<ItemType, uint> RequiredItems = new Dictionary<ItemType, uint>();
-        internal readonly uint StorageCapacity; 
-
+        internal readonly List<ItemBunch> RequiredItems;
+        internal readonly int StorageCapacity;
+        internal readonly List<List<Rpn.Elem>> Logic;
         internal ConstructionType(ConstructionTypeDto dto, TypeRepository types)
         {
             Name = dto.Name;
@@ -22,10 +22,13 @@ namespace FactoryStarter.Core.Constructions
                 .ToList();
             
             StorageCapacity = dto.StorageCapacity;
-            
-            foreach (var (key, value) in dto.RequiredItems)
-                RequiredItems.Add(types.GetItemType(key), value);
+            Logic = dto.Logic
+                .Select(x => x.ToList())
+                .ToList();
+
+            RequiredItems = dto.RequiredItems
+                .Select(dto => new ItemBunch(dto, types))
+                .ToList();
         }
-        
     }
 }

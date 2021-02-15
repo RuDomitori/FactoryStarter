@@ -4,6 +4,7 @@ namespace FactoryStarter.Core.Constructions
 {
     public interface IConstructionEventHandler
     {
-        public void OnItemInserted(int slot, ItemDto item);
+        public void OnItemBunchAdded(ItemBunchDto itemBunch);
+        public void OnItemBunchRemoved(ItemBunchDto itemBunch);
     }
 }
