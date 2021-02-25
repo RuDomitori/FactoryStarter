@@ -3,10 +3,9 @@ using System;
 namespace FactoryStarter.Core.Items
 {
     [Serializable]
-    public class ItemBunchDto
-    {
-        public int TypeId { get; set; }
-        public int Count { get; set; }
+    public class ItemBunchDto {
+        public int TypeId;
+        public int Count;
         
         public ItemBunchDto(){}
         

@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4109460388924427406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4109460388924427407}
+  - component: {fileID: 6029533832875132958}
+  m_Layer: 0
+  m_Name: Game
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4109460388924427407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109460388924427406}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6029533832875132958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109460388924427406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39cc2dc251cf10caa83a673fb3e0ed3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CellPrefab: {fileID: 4404148353843877015, guid: 859aea7a1d2fe387b8bbf5748d23c9f5,
+    type: 3}
+  DtoRepository:
+    ConstructionTypes:
+    - Name: Plus factory
+      Id: 0
+      Offsets:
+      - X: 0
+        Y: 1
+        Layer: 2
+      - X: -1
+        Y: 0
+        Layer: 2
+      - X: 0
+        Y: 0
+        Layer: 2
+      - X: 1
+        Y: 0
+        Layer: 2
+      - X: 0
+        Y: -1
+        Layer: 2
+      RequiredItems:
+      - TypeId: 1
+        Count: 10
+      - TypeId: 2
+        Count: 5
+      - TypeId: 3
+        Count: 1
+      StorageCapacity: 4
+    - Name: Square factory
+      Id: 1
+      Offsets:
+      - X: -1
+        Y: 1
+        Layer: 2
+      - X: 0
+        Y: 1
+        Layer: 0
+      - X: 1
+        Y: 1
+        Layer: 2
+      - X: -1
+        Y: 0
+        Layer: 2
+      - X: 0
+        Y: 0
+        Layer: 2
+      - X: 1
+        Y: 0
+        Layer: 2
+      - X: -1
+        Y: -1
+        Layer: 2
+      - X: 0
+        Y: -1
+        Layer: 2
+      - X: 1
+        Y: -1
+        Layer: 2
+      RequiredItems:
+      - TypeId: 1
+        Count: 10
+      StorageCapacity: 8
+    ItemTypes:
+    - Name: ItemType1
+      Id: 1
+      CountPerSlot: 4
+    - Name: ItemType2
+      Id: 2
+      CountPerSlot: 16
+    - Name: ItemType3
+      Id: 3
+      CountPerSlot: 32
+    Levels:
+    - Name: 
+      Id: 0
+      Width: 0
+      Height: 0
+      AvailableConstructionTypes: 00000000
+      Constructions:
+      - TypeId: 0
+        Id: 0
+        Center:
+          X: 0
+          Y: 0
+        Items:
+        - TypeId: 0
+          Count: 0
+  ConstructionPrefabs:
+  - {fileID: 7949904097211442919, guid: 91cbe3ad837005e88b8016be05e90043, type: 3}
+  - {fileID: 6206690084605865222, guid: 2def36105c4b25c6bb9a48072b4640f6, type: 3}

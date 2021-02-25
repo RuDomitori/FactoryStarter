@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using FactoryStarter.Core.Constructions;
 using System.Linq;
 
-namespace FactoryStarter.Core.Levels
-{
+namespace FactoryStarter.Core.Levels {
     [Serializable]
-    public class LevelDto
-    {
-        public string Name { get; set; }
-        public int Id { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public List<int> AvailableConstructionTypes { get; set; }
-        public List<ConstructionDto> Constructions { get; set; }
+    public class LevelDto {
+        public string Name;
+        public int Id;
+        public int Width;
+        public int Height;
+        public List<int> AvailableConstructionTypes;
+        public List<ConstructionDto> Constructions;
 
-        public LevelDto() {}
+        public LevelDto() { }
 
-        internal LevelDto(Level level)
-        {
+        internal LevelDto(Level level) {
             Name = level.Name;
             Id = level.Id;
             Width = level.Width;

@@ -4,9 +4,9 @@ namespace FactoryStarter.Core.Constructions.Rpn {
     
     [Serializable]
     public struct Elem {
-        public readonly ElemType Type;
-        public readonly int Number;
-        public readonly string Str;
+        public ElemType Type;
+        public int Number;
+        public string Str;
 
         public Elem(ElemType type, int number = 0, string str = null) {
             Type = type;

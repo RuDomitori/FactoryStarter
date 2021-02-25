@@ -7,12 +7,11 @@ using FactoryStarter.Core.Positions;
 namespace FactoryStarter.Core.Constructions
 {
     [Serializable]
-    public class ConstructionDto
-    {
-        public int TypeId { get; set; }
-        public int Id { get; set; }
-        public Position2 Center { get; set; }
-        public List<ItemBunchDto> Items { get; set; }
+    public class ConstructionDto {
+        public int TypeId;
+        public int Id;
+        public Position2 Center;
+        public List<ItemBunchDto> Items;
         
         public ConstructionDto() {}
         

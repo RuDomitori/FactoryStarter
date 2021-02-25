@@ -1,9 +1,11 @@
+using System;
+
 namespace FactoryStarter.Core.Items
 {
-    public class ItemTypeDto
-    {
-        public string Name { get; set; }
-        public int Id { get; set; }
-        public int CountPerSlot { get; set; } = 1;
+    [Serializable]
+    public class ItemTypeDto {
+        public string Name;
+        public int Id;
+        public int CountPerSlot = 1;
     }
 }
