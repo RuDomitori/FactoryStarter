@@ -4,20 +4,8 @@ using FactoryStarter.Core.Constructions;
 using FactoryStarter.Core.Items;
 using UnityEngine;
 
-public class ConstructionComponent : MonoBehaviour, IConstructionEventHandler
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+public class ConstructionComponent : MonoBehaviour, IConstructionEventHandler {
+    public ConstructionTypeDto dto;
     public void OnItemBunchAdded(ItemBunchDto itemBunch) {
         throw new System.NotImplementedException();
     }

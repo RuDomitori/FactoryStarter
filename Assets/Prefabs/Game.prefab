@@ -135,3 +135,7 @@ MonoBehaviour:
   ConstructionPrefabs:
   - {fileID: 7949904097211442919, guid: 91cbe3ad837005e88b8016be05e90043, type: 3}
   - {fileID: 6206690084605865222, guid: 2def36105c4b25c6bb9a48072b4640f6, type: 3}
+  ItemPrefabs:
+  - {fileID: 7113877519749878139, guid: 30810c2bd5ea511e3a7066b09940d2b3, type: 3}
+  - {fileID: 2270622790795215014, guid: f02271981f50eb236bee8120f9661c8e, type: 3}
+  - {fileID: 4631368287413606031, guid: 39361212e5d1552e7b83c74c6d994f56, type: 3}
