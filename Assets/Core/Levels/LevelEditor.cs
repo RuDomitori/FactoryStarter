@@ -25,5 +25,10 @@ namespace FactoryStarter.Core.Levels
             _level.GetConstruction(constructionId)
                 .AddItemBunch(new ItemBunch(bunchDto, _typeRepository));
         }
+
+        public void RemoveItemBunch(int constructionId, ItemBunchDto bunchDto) {
+            var construction = _level.GetConstruction(constructionId);
+            construction.RemoveItemBunch(new ItemBunch(bunchDto, _typeRepository));
+        }
     }
 }

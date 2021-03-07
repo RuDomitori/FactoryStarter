@@ -6,6 +6,12 @@ namespace FactoryStarter.Core.Positions {
     public struct Position3 {
         public int X;
         public int Y;
-        public uint Layer;
+        public Layer Layer;
+    }
+
+    public enum Layer {
+        Transport,
+        Logic,
+        Factory,
     }
 }

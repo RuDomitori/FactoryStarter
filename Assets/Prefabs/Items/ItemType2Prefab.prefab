@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1252405676374910631}
   - component: {fileID: -2759251576854826531}
   m_Layer: 0
-  m_Name: TestItem2Prefab
+  m_Name: ItemType2Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,10 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ac7eee9b9bdc90196420d2acb72c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dto:
-    Name: ItemTyp2
-    Id: 2
-    CountPerSlot: 16
+  Id: 2
+  Name: ItemType2
 --- !u!1 &2327622403220923989
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System;
 using FactoryStarter.Core.Constructions;
+using FactoryStarter.Core.Positions;
 
 namespace FactoryStarter.Core {
     internal struct Cell {
@@ -7,14 +8,14 @@ namespace FactoryStarter.Core {
         private Construction _logic;
         private Construction _transport;
 
-        internal Construction this[uint layer] {
+        internal Construction this[Layer layer] {
             get {
                 switch (layer) {
-                    case 0:
+                    case Layer.Transport:
                         return _transport;
-                    case 1:
+                    case Layer.Logic:
                         return _logic;
-                    case 2:
+                    case Layer.Factory:
                         return _factory;
                     default:
                         throw new ArgumentException($"Layer {layer} is not exist");
@@ -22,13 +23,13 @@ namespace FactoryStarter.Core {
             }
             set {
                 switch (layer) {
-                    case 0:
+                    case Layer.Transport:
                         _transport = value;
                         break;
-                    case 1:
+                    case Layer.Logic:
                         _logic = value;
                         break;
-                    case 2:
+                    case Layer.Factory:
                         _factory = value;
                         break;
                     default:
